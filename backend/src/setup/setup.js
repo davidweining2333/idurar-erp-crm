@@ -5,7 +5,12 @@ const fs = require('fs');
 const { generate: uniqueId } = require('shortid');
 
 const mongoose = require('mongoose');
-mongoose.connect(process.env.DATABASE);
+mongoose.connect(process.env.DATABASE, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+  authSource: 'admin',
+  auth: { username: process.env.USER, password: process.env.PASSWORD },
+});
 
 async function setupApp() {
   try {
